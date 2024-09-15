@@ -2,6 +2,8 @@ package EjercicioBiblioteca;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 public class Libro {
 	
 	//Atributos
@@ -17,7 +19,7 @@ public class Libro {
 	public Libro() {
 		this.nombre = "No asignado";
 		this.autor = "No asignado";
-		this.disponibilidad = null;
+		this.disponibilidad = true;
 		this.fechaInicio = LocalDate.now();
 		this.fechaDevolucion = LocalDate.now();
 		this.persona = "No asignado";
@@ -82,12 +84,52 @@ public class Libro {
 	}
 	
 	public void solicitarLibro() {
-		
+		this.nombre = validarCaracteres("Ingrese el nombre del Libro");
+		this.autor = validarCaracteres("Ingrese el nombre del Autor");
+		this.disponibilidad = validarDisponibilidad("¿Esta disponible?");
+		this.fechaInicio = LocalDate.of(validarDigitos("Ingrese Año"),validarDigitos("Ingrese Mes"),validarDigitos("Ingrese Dia"));
 	}
 	
 	public String validarCaracteres(String mensaje) {
+		String texto = "";
+		while (texto.equals("")) {
+			texto = JOptionPane.showInputDialog(mensaje);
+		}
+		return texto;
+	}
+	
+	public int validarDigitos(String mensaje) {
+		String num = "";
+		Boolean flag;
+		do {
+			flag = true;
+			num = JOptionPane.showInputDialog(mensaje);
+			while (num.isEmpty()) {
+				num = JOptionPane.showInputDialog(mensaje);
+			}
+			for (int i = 0; i < num.length(); i++) {
+				if(!Character.isDigit(num.charAt(i))) {
+					flag = false;
+					break;
+				}
+			}
+		} while (!flag);
 		
-		return "";
+		return Integer.parseInt(num);
+	}
+	
+	public boolean validarDisponibilidad(String mensaje) {
+		String disp [] = {"Si","No"};
+		int opcion = JOptionPane.showOptionDialog(null, mensaje, null, 0, 0, null, disp, disp[0]);
+		switch (opcion) {
+		case 0:
+			return true;
+		case 1:
+			return false;
+		default:
+			break;
+		}
+		return true;
 	}
 	
 	

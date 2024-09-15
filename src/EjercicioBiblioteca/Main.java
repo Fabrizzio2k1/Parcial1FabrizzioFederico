@@ -14,6 +14,7 @@ public class Main {
 			opcion = JOptionPane.showOptionDialog(null, "Bienvenido a Lectores Felices!!!\nElija una opcion:", null, 0, 0, null, menu, menu[0]);
 			switch (opcion) {
 			case 0:
+				l1.solicitarLibro();
 				break;
 			case 1:
 				if (l1.getNombre().equals("No asignado")) {

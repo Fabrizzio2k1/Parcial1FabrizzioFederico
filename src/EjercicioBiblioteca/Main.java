@@ -20,14 +20,14 @@ public class Main {
 				if (l1.getNombre().equals("No asignado")) {
 					JOptionPane.showMessageDialog(null, "No solicitaste ningun libro...");
 				} else {
-					// Aca va la devolucion
+					l1.getDevolucion();
 				}
 				break;
 			case 2:
 				if (l1.getNombre().equals("No asignado")) {
 					JOptionPane.showMessageDialog(null, "No solicitaste ningun libro...");
 				} else {
-					// Aca va el estado
+					JOptionPane.showMessageDialog(null, l1);
 				}
 				break;
 			case 3:

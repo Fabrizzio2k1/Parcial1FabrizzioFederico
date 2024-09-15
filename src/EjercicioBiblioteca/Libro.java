@@ -12,6 +12,7 @@ public class Libro {
 	private Boolean disponibilidad;
 	private LocalDate fechaInicio;
 	private LocalDate fechaDevolucion;
+	private String devolucion;
 	private String persona;
 	private int dni;
 	
@@ -21,7 +22,8 @@ public class Libro {
 		this.autor = "No asignado";
 		this.disponibilidad = true;
 		this.fechaInicio = LocalDate.now();
-		this.fechaDevolucion = LocalDate.now();
+		this.fechaDevolucion = this.fechaInicio;
+		this.devolucion = "No asignado";
 		this.persona = "No asignado";
 		this.dni = 0;
 	}
@@ -66,6 +68,14 @@ public class Libro {
 	public void setFechaDevolucion(LocalDate fechaDevolucion) {
 		this.fechaDevolucion = fechaDevolucion;
 	}
+	
+	public String getDevolucion() {
+		return devolucion;
+	}
+
+	public void setDevolucion(String devolucion) {
+		this.devolucion = devolucion;
+	}
 
 	public String getPersona() {
 		return persona;
@@ -91,6 +101,11 @@ public class Libro {
 		this.persona = validarNombre("Ingrese el nombre de la persona que pide el prestamo:");
 		this.dni = validarDni("Ingrese el DNI de la persona");
 		JOptionPane.showMessageDialog(null, "Fue cargado Extiosamente!!!");
+	}
+	
+	public void devolverLibro() {
+		fechaDevolucion = fechaDevolucion.plusDays(7);
+		devolucion = "la Persona: " + persona + " con DNI: " + dni + " Tiene que devolver el libro el: " + fechaDevolucion;
 	}
 	
 	public String validarCaracteres(String mensaje) {

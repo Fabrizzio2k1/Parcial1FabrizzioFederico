@@ -89,7 +89,8 @@ public class Libro {
 		this.disponibilidad = validarDisponibilidad("¿Esta disponible?");
 		this.fechaInicio = LocalDate.of(validarDigitos("Fecha del prestamo del libro\nAño:"),validarDigitos("Fecha del prestamo del libro\nMes:"),validarDigitos("Fecha del prestamo del libro\nDia:"));
 		this.persona = validarCaracteres("Ingrese el nombre de la persona que pide el prestamo:");
-		this.dni = validarDigitos("Ingrese el dni de la persona");
+		this.dni = validarDni("Ingrese el DNI de la persona");
+		JOptionPane.showMessageDialog(null, "Fue cargado Extiosamente!!!");
 	}
 	
 	public String validarCaracteres(String mensaje) {
@@ -120,6 +121,26 @@ public class Libro {
 		return Integer.parseInt(num);
 	}
 	
+	public int validarDni(String mensaje) {
+		String num = "";
+		Boolean flag;
+		do {
+			flag = true;
+			num = JOptionPane.showInputDialog(mensaje);
+			while (num.isEmpty() || num.length() != 8) {
+				num = JOptionPane.showInputDialog(mensaje);
+			}
+			for (int i = 0; i < num.length(); i++) {
+				if(!Character.isDigit(num.charAt(i))) {
+					flag = false;
+					break;
+				}
+			}
+		} while (!flag);
+		
+		return Integer.parseInt(num);
+	}
+	
 	public boolean validarDisponibilidad(String mensaje) {
 		String disp [] = {"Si","No"};
 		int opcion = JOptionPane.showOptionDialog(null, mensaje, null, 0, 0, null, disp, disp[0]);
@@ -133,7 +154,11 @@ public class Libro {
 		}
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Libro [nombre=" + nombre + ", autor=" + autor + ", disponibilidad=" + disponibilidad + ", fechaInicio="
+				+ fechaInicio + ", fechaDevolucion=" + fechaDevolucion + ", persona=" + persona + ", dni=" + dni + "]";
+	}
 	
 }

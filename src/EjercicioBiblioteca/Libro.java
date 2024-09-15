@@ -23,7 +23,7 @@ public class Libro {
 		this.disponibilidad = true;
 		this.fechaInicio = LocalDate.now();
 		this.fechaDevolucion = this.fechaInicio;
-		this.devolucion = "No asignado";
+		this.devolucion = "Devolucion: ";
 		this.persona = "No asignado";
 		this.dni = 0;
 	}
@@ -94,18 +94,24 @@ public class Libro {
 	}
 	
 	public void solicitarLibro() {
-		this.nombre = validarCaracteres("Ingrese el nombre del Libro:");
-		this.autor = validarNombre("Ingrese el nombre del Autor:");
-		this.disponibilidad = validarDisponibilidad("¿Esta disponible?");
-		this.fechaInicio = LocalDate.of(validarDigitos("Fecha del prestamo del libro\nAño:"),validarDigitos("Fecha del prestamo del libro\nMes:"),validarDigitos("Fecha del prestamo del libro\nDia:"));
-		this.persona = validarNombre("Ingrese el nombre de la persona que pide el prestamo:");
-		this.dni = validarDni("Ingrese el DNI de la persona");
-		JOptionPane.showMessageDialog(null, "Fue cargado Extiosamente!!!");
+		do {
+			this.nombre = validarCaracteres("Ingrese el nombre del Libro:");
+			this.autor = validarNombre("Ingrese el nombre del Autor:");
+			this.disponibilidad = validarDisponibilidad("¿Esta disponible?");
+			if(!disponibilidad) {
+				JOptionPane.showMessageDialog(null, "El libro no está disponible. Por favor, intente nuevamente.");
+				continue;
+			}
+			this.fechaInicio = LocalDate.of(validarDigitos("Fecha del prestamo del libro\nAño:"),validarDigitos("Fecha del prestamo del libro\nMes:"),validarDigitos("Fecha del prestamo del libro\nDia:"));
+			this.persona = validarNombre("Ingrese el nombre de la persona que pide el prestamo:");
+			this.dni = validarDni("Ingrese el DNI de la persona");
+			JOptionPane.showMessageDialog(null, "Fue cargado Extiosamente!!!");
+		} while (disponibilidad!=true);
 	}
 	
 	public void devolverLibro() {
 		fechaDevolucion = fechaDevolucion.plusDays(7);
-		devolucion = "la Persona: " + persona + " con DNI: " + dni + " Tiene que devolver el libro el: " + fechaDevolucion;
+		devolucion = devolucion + "la Persona " + persona + ", con DNI " + dni + ", Tiene que devolver el libro el " + fechaDevolucion;
 	}
 	
 	public String validarCaracteres(String mensaje) {

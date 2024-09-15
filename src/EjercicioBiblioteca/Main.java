@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String menu [] = {"Solicitar","Devolver","Estado","Salir"};
+		String menu [] = {"Solicitar","Devolver","Comprobante","Salir"};
 		int opcion;
 		Libro l1 = new Libro();
 		
@@ -20,7 +20,8 @@ public class Main {
 				if (l1.getNombre().equals("No asignado")) {
 					JOptionPane.showMessageDialog(null, "No solicitaste ningun libro...");
 				} else {
-					l1.getDevolucion();
+					l1.devolverLibro();
+					JOptionPane.showMessageDialog(null, l1.getDevolucion());
 				}
 				break;
 			case 2:

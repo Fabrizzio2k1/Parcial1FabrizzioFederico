@@ -13,7 +13,7 @@ public class Libro {
 	private LocalDate fechaInicio;
 	private LocalDate fechaDevolucion;
 	private String persona;
-	private String dni;
+	private int dni;
 	
 	//Constructor
 	public Libro() {
@@ -23,7 +23,7 @@ public class Libro {
 		this.fechaInicio = LocalDate.now();
 		this.fechaDevolucion = LocalDate.now();
 		this.persona = "No asignado";
-		this.dni = "No asignado";
+		this.dni = 0;
 	}
 	
 	//Getters y Setters
@@ -75,19 +75,21 @@ public class Libro {
 		this.persona = persona;
 	}
 
-	public String getDni() {
+	public int getDni() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
+	public void setDni(int dni) {
 		this.dni = dni;
 	}
 	
 	public void solicitarLibro() {
-		this.nombre = validarCaracteres("Ingrese el nombre del Libro");
-		this.autor = validarCaracteres("Ingrese el nombre del Autor");
+		this.nombre = validarCaracteres("Ingrese el nombre del Libro:");
+		this.autor = validarCaracteres("Ingrese el nombre del Autor:");
 		this.disponibilidad = validarDisponibilidad("¿Esta disponible?");
-		this.fechaInicio = LocalDate.of(validarDigitos("Ingrese Año"),validarDigitos("Ingrese Mes"),validarDigitos("Ingrese Dia"));
+		this.fechaInicio = LocalDate.of(validarDigitos("Fecha del prestamo del libro\nAño:"),validarDigitos("Fecha del prestamo del libro\nMes:"),validarDigitos("Fecha del prestamo del libro\nDia:"));
+		this.persona = validarCaracteres("Ingrese el nombre de la persona que pide el prestamo:");
+		this.dni = validarDigitos("Ingrese el dni de la persona");
 	}
 	
 	public String validarCaracteres(String mensaje) {

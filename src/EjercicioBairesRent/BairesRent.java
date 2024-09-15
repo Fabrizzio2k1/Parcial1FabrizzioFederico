@@ -2,6 +2,8 @@ package EjercicioBairesRent;
 
 import java.time.LocalDate;
 
+import javax.swing.JOptionPane;
+
 public class BairesRent {
 	//Atributos
 	
@@ -83,8 +85,54 @@ public class BairesRent {
 	}
 	
 	public void ingresarCuenta() {
+		this.inquilino = validarNombre("Ingrese su nombre:");
+		this.dni = verificarDocumento("Ingrese su DNI:");
+		JOptionPane.showMessageDialog(null, "Bienvenido al Sistema " + this.inquilino );
+	}
+	
+	public void seleccionarAlquiler() {
 		
 	}
 	
+	public String validarNombre(String mensaje) {
+		String texto = "";
+		Boolean flag;
+		do {
+			flag = true;
+			texto = JOptionPane.showInputDialog(mensaje);
+			while (texto.isEmpty()) {
+				texto = JOptionPane.showInputDialog(mensaje);
+			}
+			for (int i = 0; i < texto.length(); i++) {
+				if(!Character.isAlphabetic(texto.charAt(i))) {
+					flag = false;
+					break;
+				}
+			}
+		} while (!flag);
+		
+		return texto;
+	}
 	
+	public int verificarDocumento(String mensaje) {
+		String documento = "";
+		boolean flag;
+		
+		do {
+			flag = true;
+			documento = JOptionPane.showInputDialog(mensaje);
+		while (documento.isEmpty() || documento.length() != 8) {
+			documento = JOptionPane.showInputDialog(mensaje);
+		}
+		for (int i = 0; i < documento.length(); i++) {
+            if (!Character.isDigit(documento.charAt(i))) {
+                flag = false;
+                break;
+            }
+		}
+		} while (!flag);
+		
+		return Integer.parseInt(documento);
 }
+}
+

@@ -85,10 +85,10 @@ public class Libro {
 	
 	public void solicitarLibro() {
 		this.nombre = validarCaracteres("Ingrese el nombre del Libro:");
-		this.autor = validarCaracteres("Ingrese el nombre del Autor:");
+		this.autor = validarNombre("Ingrese el nombre del Autor:");
 		this.disponibilidad = validarDisponibilidad("¿Esta disponible?");
 		this.fechaInicio = LocalDate.of(validarDigitos("Fecha del prestamo del libro\nAño:"),validarDigitos("Fecha del prestamo del libro\nMes:"),validarDigitos("Fecha del prestamo del libro\nDia:"));
-		this.persona = validarCaracteres("Ingrese el nombre de la persona que pide el prestamo:");
+		this.persona = validarNombre("Ingrese el nombre de la persona que pide el prestamo:");
 		this.dni = validarDni("Ingrese el DNI de la persona");
 		JOptionPane.showMessageDialog(null, "Fue cargado Extiosamente!!!");
 	}
@@ -98,6 +98,26 @@ public class Libro {
 		while (texto.equals("")) {
 			texto = JOptionPane.showInputDialog(mensaje);
 		}
+		return texto;
+	}
+	
+	public String validarNombre(String mensaje) {
+		String texto = "";
+		Boolean flag;
+		do {
+			flag = true;
+			texto = JOptionPane.showInputDialog(mensaje);
+			while (texto.isEmpty()) {
+				texto = JOptionPane.showInputDialog(mensaje);
+			}
+			for (int i = 0; i < texto.length(); i++) {
+				if(!Character.isAlphabetic(texto.charAt(i))) {
+					flag = false;
+					break;
+				}
+			}
+		} while (!flag);
+		
 		return texto;
 	}
 	

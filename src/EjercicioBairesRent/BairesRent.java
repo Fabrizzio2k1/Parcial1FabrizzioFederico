@@ -91,8 +91,18 @@ public class BairesRent {
 	}
 	
 	public String seleccionarUbicacion() {
-		String opciones [] = {"La Boca","Caballito","Almagro","Palermo","Recoleta"};
-		ubicacion = (String) JOptionPane.showInputDialog(null, "Seleccione una Opción:", "Departamentos", 0, null, opciones,opciones[0]);
+		disponibilidad = false;
+		while (!disponibilidad) {
+			String opciones [] = {"La Boca","Caballito","Almagro","Palermo","Recoleta"};
+			ubicacion = (String) JOptionPane.showInputDialog(null, "Seleccione una Opción:", "Departamentos", 0, null, opciones,opciones[0]);
+			if (ubicacion.equals("La Boca") || ubicacion.equals("Almagro")) {
+				do {
+					ubicacion = (String) JOptionPane.showInputDialog(null, ubicacion + " No esta disponible", "Vuelva a seleccionar departamento", 0, null, opciones,opciones[0]);
+				} while (ubicacion.equals("La Boca") || ubicacion.equals("Almagro"));
+			}
+			disponibilidad = true;
+			
+		}
 		return ubicacion;
 	}
 	

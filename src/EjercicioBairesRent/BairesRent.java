@@ -90,8 +90,46 @@ public class BairesRent {
 		JOptionPane.showMessageDialog(null, "Bienvenido al Sistema " + this.inquilino );
 	}
 	
-	public void seleccionarAlquiler() {
-		
+	public String seleccionarUbicacion() {
+		String opciones [] = {"La Boca","Caballito","Almagro","Palermo","Recoleta"};
+		ubicacion = (String) JOptionPane.showInputDialog(null, "Seleccione una Opción:", "Departamentos", 0, null, opciones,opciones[0]);
+		return ubicacion;
+	}
+	
+	public double seleccionarTamaño() {
+		this.tamaño = validarDigitos("Ingrese el tamaño del depto");
+		return tamaño;
+	}
+	
+	public void alquilarDepartamento() {
+		switch (ubicacion) {
+		case "La Boca":
+				this.precio = 100;
+				this.precio *= tamaño;
+			break;
+		case "Caballito":
+				this.precio = 1000;
+				this.precio *= tamaño;
+			break;
+		case "Almagro":
+				this.precio = 500;
+				this.precio *= tamaño;
+			break;
+		case "Palermo":
+				this.precio = 5000;
+				this.precio *= tamaño;
+			break;
+		case "Recoleta":
+				this.precio = 10000;
+				this.precio *= tamaño;
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void comprarDepartamento() {
+		JOptionPane.showMessageDialog(null, "Felicitaciones " + inquilino + " compraste el departamento en " + ubicacion + ", su precio final fue $" + precio + ", el " + fecha);
 	}
 	
 	public String validarNombre(String mensaje) {
@@ -134,5 +172,25 @@ public class BairesRent {
 		
 		return Integer.parseInt(documento);
 }
+	
+	public double validarDigitos(String mensaje) {
+		String num = "";
+		Boolean flag;
+		do {
+			flag = true;
+			num = JOptionPane.showInputDialog(mensaje);
+			while (num.isEmpty()) {
+				num = JOptionPane.showInputDialog(mensaje);
+			}
+			for (int i = 0; i < num.length(); i++) {
+				if(!Character.isDigit(num.charAt(i))) {
+					flag = false;
+					break;
+				}
+			}
+		} while (!flag);
+		
+		return Double.parseDouble(num);
+	}
 }
 
